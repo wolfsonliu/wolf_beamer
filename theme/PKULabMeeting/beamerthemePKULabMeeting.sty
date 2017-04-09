@@ -1,6 +1,5 @@
 \RequirePackage{tikz}
-\usepgflibrary{fadings}
-
+\usetikzlibrary{fadings}
 \RequirePackage{iftex}
 
 \AtBeginDocument{\setbeamertemplate{logo}{}}
@@ -14,7 +13,7 @@
 \newcommand{\PKU@backgroundlogo}{}
 
 \renewcommand{\logo}[1]{\renewcommand{\PKU@logo}{#1}}
-%\newcommand{\supervisor}[1]{\renewcommand{\PKU@supervisor}{#1}}
+\newcommand{\supervisor}[1]{\renewcommand{\PKU@supervisor}{#1}}
 \newcommand{\department}[1]{\renewcommand{\PKU@department}{#1}}
 \newcommand{\titlepagelogo}[1]{\renewcommand{\PKU@titlepagelogo}{#1}}
 \newcommand{\titlepagebackground}[1]{\renewcommand{\PKU@titlepagebackground}{#1}}
@@ -56,6 +55,32 @@
 \setbeamercolor{block title example}{fg=PKULightRed}
 \setbeamercolor{section in toc}{fg=PKULightRed}
 \setbeamercolor{subsection in toc}{fg=PKULightRed}
+
+\tikzfading[
+  name=PKUright,
+  left color=transparent!0,
+  middle color=transparent!70,
+  right color=transparent!100
+]
+\tikzfading[
+  name=PKUleft,
+  left color=transparent!100,
+  middle color=transparent!70,
+  right color=transparent!0
+]
+\tikzfading[
+  name=PKUup,
+  top color=transparent!0,
+  middle color=transparent!70,
+  bottom color=transparent!100
+]
+\tikzfading[
+  name=PKUdown,
+  top color=transparent!100,
+  middle color=transparent!70,
+  bottom color=transparent!0
+]
+
 
 \setbeamerfont{title}{size=\LARGE}
 \setbeamerfont{author}{shape=\itshape}
@@ -107,27 +132,30 @@
 	\fi%
 }
 
+\tikzfading[
+  name=fade right,
+  left color=transparent!100,
+  right color=transparent!0
+]
+
 \setbeamertemplate{title page}{
   \usebeamercolor{title page}
   \begin{tikzpicture}
 	\useasboundingbox (1,0) rectangle (\the\paperwidth,\the\paperheight);
 	\node[opacity=0.4] at (4, 4) {\PKU@titlepagebackground};
-
-	%\fill[top color=PKULightRed, middle color=PKULightRed, bottom color=MilanoDarkBlue] (0, 6.75) rectangle (\the\paperwidth, 8.75);
-    \fill[PKURed, path fading=west] (0, 0) rectangle (9,\the\paperheight);
+    \fill[path fading=PKUleft,PKURed] (0, 0) rectangle (9,\the\paperheight);
     %% plot color
     \fill[PKURed] (9, 0) rectangle (\the\paperwidth,\the\paperheight);
     %% plot color
-    \fill[PKURed, path fading=south] (0, 3) rectangle (\the\paperwidth,8);
+    \fill[PKURed, path fading=PKUup] (0, 3) rectangle (\the\paperwidth,8);
     %% plot color
     \fill[PKURed] (0, 7.5) rectangle (\the\paperwidth,\the\paperheight);
     %% plot color
     \node[right] at (1, 8.5) {\PKU@titlepagelogo};  %% plot logo
 	\node[align=center, font=\usebeamerfont{title}] at (6.4, 6.5) {\inserttitle};
 	\node[align=center, font=\usebeamerfont{author}] at (6.4, 5.2) {\insertauthor};
-    \node[align=center] at (6.4, 4.6) {\insertdate};
-	
-    %\node[align=left, font=\usebeamerfont{author}, right] at (1.3, 1.4) {\PKU@supervisor};
+    \node[align=center, font=\usebeamerfont{author}] at (6.4, 4.6) {Supervisor: \PKU@supervisor};
+    \node[align=center] at (11.0, 1.4) {\insertdate};
     %\draw[step=1, help lines] (0,0) grid (\the\paperwidth,\the\paperheight);
   \end{tikzpicture}
 }
