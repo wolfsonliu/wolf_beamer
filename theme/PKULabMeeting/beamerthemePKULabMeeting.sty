@@ -1,6 +1,7 @@
 \RequirePackage{tikz}
 \usetikzlibrary{fadings}
 \RequirePackage{iftex}
+\RequirePackage{xcolor}
 
 \AtBeginDocument{\setbeamertemplate{logo}{}}
 
@@ -11,7 +12,9 @@
 \newcommand{\PKU@titlepagelogo}{}
 \newcommand{\PKU@titlepagebackground}{}
 \newcommand{\PKU@backgroundlogo}{}
+\newcommand{\PKU@date}{}
 
+\renewcommand{\date}[1]{\renewcommand{\PKU@date}{#1}}
 \renewcommand{\logo}[1]{\renewcommand{\PKU@logo}{#1}}
 \newcommand{\supervisor}[1]{\renewcommand{\PKU@supervisor}{#1}}
 \newcommand{\department}[1]{\renewcommand{\PKU@department}{#1}}
@@ -42,8 +45,8 @@
 \setbeamercolor{normal text}{fg=PKUTextGray, bg=}
 \setbeamercolor{frametitle}{fg=PKUTitleRed}
 \setbeamercolor{footline}{bg=PKURed, fg=white}
-\setbeamercolor{section}{parent={footline}}
-\setbeamercolor{subsection}{parent={footline}}
+\setbeamercolor{section}{bg=PKURed, fg=white}
+\setbeamercolor{subsection}{bg=PKURed, fg=white}
 \setbeamercolor*{item}{fg=PKULightRed}
 \setbeamercolor*{item projected}{bg=PKULightRed}
 \setbeamercolor*{enumerate item}{fg=PKULightRed}
@@ -101,16 +104,18 @@
       \raisebox{0.2cm}{\PKU@department}%
       \fi%
     \end{beamercolorbox}%
-    \begin{beamercolorbox}[wd=0.4\paperwidth, ht=0.6cm, dp=1ex, center, sep=0.2cm]{section}%
+    \begin{beamercolorbox}[wd=0.4\paperwidth, ht=0.6cm, dp=1ex, center, sep = 0.2cm]{section}%
       \ifnum\thepage>1%
       \insertsectionhead%
+      \else%
+      \PKU@date%
       \fi%
     \end{beamercolorbox}%
-    \begin{beamercolorbox}[wd=0.3\paperwidth, ht=0.6cm, dp=1ex, right, rightskip=0.4cm]{subsection}%
+    \begin{beamercolorbox}[wd=0.3\paperwidth, ht=0.6cm, dp=1ex, right, rightskip = 0.4cm, sep = 0.2cm]{section}%
       \ifnum\thepage>1%
-      \raisebox{0.2cm}{\insertframenumber{} / \inserttotalframenumber\hspace*{2ex}}%
+      \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}%
       \else%
-      \raisebox{0.2cm}{\insertinstitute}%
+      \insertinstitute%
       \fi%
     \end{beamercolorbox}
   }
@@ -155,7 +160,7 @@
 	\node[align=center, font=\usebeamerfont{title}] at (6.4, 6.5) {\inserttitle};
 	\node[align=center, font=\usebeamerfont{author}] at (6.4, 5.2) {\insertauthor};
     \node[align=center, font=\usebeamerfont{author}] at (6.4, 4.6) {Supervisor: \PKU@supervisor};
-    \node[align=center] at (11.0, 1.4) {\insertdate};
+    % \node[align=center] at (11.0, 1.4) {\insertdate};
     %\draw[step=1, help lines] (0,0) grid (\the\paperwidth,\the\paperheight);
   \end{tikzpicture}
 }
