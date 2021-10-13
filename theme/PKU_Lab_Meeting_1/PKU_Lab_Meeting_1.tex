@@ -2,11 +2,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Name:   Work Report                                                        %%
 %% Author: Wolfson                                                            %%
-%% Date:   2016-12-12                                                         %%
+%% Date:   2021-10-13                                                         %%
 %% Discription:                                                               %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\documentclass[svgnames,table]{beamer}
+\documentclass[svgnames,table,aspectratio=169]{beamer}
 
 %%----Packages
 %%%%----Font
@@ -33,45 +33,42 @@
 %%%%----Reference
 \usepackage{hyperref}
 \hypersetup{
-    bookmarks=true,         % show bookmarks bar?
+    bookmarks=true,        % show bookmarks bar?
     unicode=true,          % non-Latin characters in Acrobat’s bookmarks
-    pdftoolbar=true,        % show Acrobat’s toolbar?
-    pdfmenubar=true,        % show Acrobat’s menu?
-    pdffitwindow=false,     % window fit to page when opened
-    pdfstartview={FitH},    % fits the width of the page to the window
+    pdftoolbar=true,       % show Acrobat’s toolbar?
+    pdfmenubar=true,       % show Acrobat’s menu?
+    pdffitwindow=false,    % window fit to page when opened
+    pdfstartview={FitH},   % fits the width of the page to the window
     pdftitle={工作汇报},    % title
     pdfauthor={刘志恒},     % author
-    pdfcreator={Wolfson},   % creator of the document
+    pdfcreator={Wolfson},  % creator of the document
     pdfproducer={Wolfson}, % producer of the document
-    pdfnewwindow=true,      % links in new PDF window
-    colorlinks=true,       % false: boxed links; true: colored links
-    linkcolor=black,          % color of internal links (change box color with linkbordercolor)
-    citecolor=black,        % color of links to bibliography
-    filecolor=black,      % color of file links
-    urlcolor=black           % color of external links
+    pdfnewwindow=true,     % links in new PDF window
+    colorlinks=false% ,    % false: boxed links; true: colored links
+    % linkcolor=black,     % color of internal links (change box color with linkbordercolor)
+    % citecolor=black,     % color of links to bibliography
+    % filecolor=black,     % color of file links
+    % urlcolor=black       % color of external links
 }
 
 %%----Theme
-\usetheme{PKULabMeeting}
+\usetheme{PKULabMeeting1}
 
 %%----Metadata
-\title{Hub Screening Work Report}
+\title{Work Report}
 \author{Zhiheng Liu}
 \institute{Peking University}    % provide the information of institute.
-\supervisor{Prof. Wensheng Wei}
 \date{\today}
-\logo{\includegraphics[height=0.06\textheight]{pku.png}}
+\logo{\includegraphics[height=0.45cm]{pku.png}}
 \titlepagelogo{\includegraphics[width=0.3\textwidth]{pku.png}}
 \titlepagebackground{\includegraphics[height=0.7\textwidth]{gate.jpg}}
 \department{School of Life Sciences}
-\backgroundlogo{\includegraphics[height=0.4\textwidth]{cloud.png}}
-
 
 %%----Document
 \begin{document}
 
 \input{frames}
- 
+
 \end{document}
 
 %%----End

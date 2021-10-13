@@ -2,4 +2,5 @@
 
 I try to make some beamer template to use.
 
-* PKU Lab Meeting: used for lab meeting and simple talk.
+* PKU Lab Meeting 1: a presentation theme for lab meetings in PKU.
+* UCLA Lab Meeting 1: a presentation theme for lab meetings in UCLA.

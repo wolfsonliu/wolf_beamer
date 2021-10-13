@@ -1,0 +1,73 @@
+%-*-coding:utf-8-*-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Name:   Work Report                                                        %%
+%% Author: Wolfson                                                            %%
+%% Date:   2021-10-12                                                         %%
+%% Discription:                                                               %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[svgnames,table,aspectratio=169]{beamer}
+
+%%----Packages
+%%%%----Font
+\usepackage{fontspec}
+% used to set font for the latex document.
+
+% using CJK to manage Chinese, need fontsec.
+\setmainfont{Times New Roman}
+\setsansfont{Arial}
+\setmonofont{Courier New}
+% \setCJKmainfont[BoldFont={方正黑体简体}, ItalicFont={方正楷体简体}]{方正大标宋简体}
+% \setCJKsansfont{方正黑体简体}
+% \setCJKmonofont{方正中等线简体}
+
+%%%%----Symbol
+\usepackage{textcomp}    % provide symbols.
+%\usepackage{mathabx}     % more symbols like astronomy.
+
+%%%%----Graph
+\usepackage{graphicx}
+\graphicspath{{pic/}}
+\usepackage{tikz}
+
+%%%%----Reference
+\usepackage{hyperref}
+\hypersetup{
+    bookmarks=true,        % show bookmarks bar?
+    unicode=true,          % non-Latin characters in Acrobat’s bookmarks
+    pdftoolbar=true,       % show Acrobat’s toolbar?
+    pdfmenubar=true,       % show Acrobat’s menu?
+    pdffitwindow=false,    % window fit to page when opened
+    pdfstartview={FitH},   % fits the width of the page to the window
+    pdftitle={工作汇报},    % title
+    pdfauthor={刘志恒},     % author
+    pdfcreator={Wolfson},  % creator of the document
+    pdfproducer={Wolfson}, % producer of the document
+    pdfnewwindow=true,     % links in new PDF window
+    colorlinks=false% ,    % false: boxed links; true: colored links
+    % linkcolor=black,     % color of internal links (change box color with linkbordercolor)
+    % citecolor=black,     % color of links to bibliography
+    % filecolor=black,     % color of file links
+    % urlcolor=black       % color of external links
+}
+
+%%----Theme
+\usetheme{UCLALabMeeting1}
+
+%%----Metadata
+\title{Work Report}
+\author{Zhiheng Liu}
+\institute{UCLA}    % provide the information of institute.
+\date{\today}
+\mainlogo{\includegraphics[height=0.3cm]{logo_UCLA_white.png}}
+\titlepagelogo{\includegraphics[width=0.3\textwidth]{UCLA-IBP-fixed-white.png}}
+\department{Department of Integrative Biology and Physiology}
+
+%%----Document
+\begin{document}
+
+\input{frames}
+
+\end{document}
+
+%%----End

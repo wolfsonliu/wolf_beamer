@@ -1,36 +1,26 @@
+% for widescreen, 16:9, 33.867 x 19.05 cm, 13.33 x 7.5 in
+% for standard, 4:3, 25.4 x 19.05 cm, 10 x 7.5 in
+
 \RequirePackage{tikz}
 \usetikzlibrary{fadings}
 \RequirePackage{iftex}
+\RequirePackage{xcolor}
 
 \AtBeginDocument{\setbeamertemplate{logo}{}}
 
-
 \newcommand{\PKU@logo}{}
-\newcommand{\PKU@supervisor}{}
 \newcommand{\PKU@department}{}
 \newcommand{\PKU@titlepagelogo}{}
 \newcommand{\PKU@titlepagebackground}{}
 \newcommand{\PKU@backgroundlogo}{}
+\newcommand{\PKU@date}{}
 
+\renewcommand{\date}[1]{\renewcommand{\PKU@date}{#1}}
 \renewcommand{\logo}[1]{\renewcommand{\PKU@logo}{#1}}
-\newcommand{\supervisor}[1]{\renewcommand{\PKU@supervisor}{#1}}
 \newcommand{\department}[1]{\renewcommand{\PKU@department}{#1}}
 \newcommand{\titlepagelogo}[1]{\renewcommand{\PKU@titlepagelogo}{#1}}
 \newcommand{\titlepagebackground}[1]{\renewcommand{\PKU@titlepagebackground}{#1}}
 \newcommand{\backgroundlogo}[1]{\renewcommand{\PKU@backgroundlogo}{#1}}
-
-
-\newcommand{\thanksframe}[1]{{
-	\setbeamertemplate{background}{
-		\begin{tikzpicture}
-			\useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
-			\fill[PKURed] (0,0) rectangle(\the\paperwidth,\the\paperheight);
-		\end{tikzpicture}
-	}
-	\begin{frame}[c]
-	\centering\Large\color{white} #1
-	\end{frame}
-}}
 
 \definecolor{PKURed}{RGB}{139,0,18}
 \definecolor{PKULightRed}{RGB}{198,0,26}
@@ -42,8 +32,8 @@
 \setbeamercolor{normal text}{fg=PKUTextGray, bg=}
 \setbeamercolor{frametitle}{fg=PKUTitleRed}
 \setbeamercolor{footline}{bg=PKURed, fg=white}
-\setbeamercolor{section}{parent={footline}}
-\setbeamercolor{subsection}{parent={footline}}
+\setbeamercolor{section}{bg=PKURed, fg=white}
+\setbeamercolor{subsection}{bg=PKURed, fg=white}
 \setbeamercolor*{item}{fg=PKULightRed}
 \setbeamercolor*{item projected}{bg=PKULightRed}
 \setbeamercolor*{enumerate item}{fg=PKULightRed}
@@ -81,9 +71,10 @@
   bottom color=transparent!0
 ]
 
-
 \setbeamerfont{title}{size=\LARGE}
 \setbeamerfont{author}{shape=\itshape}
+\setbeamerfont{department}{size=\scriptsize}
+\setbeamerfont{date}{size=\scriptsize}
 \setbeamerfont{frametitle}{series=\bfseries}
 
 \setbeamertemplate{navigation symbols}{}
@@ -92,44 +83,39 @@
 
 \setbeamertemplate{footline}{
   \leavevmode\hbox{%
-    \begin{beamercolorbox}[wd=0.3\paperwidth, ht=0.6cm, dp=1ex, left, leftskip=0.4cm]{section}%
-      \ifnum\thepage>1%
-      \vfill%
+    \ifnum\thepage>1\relax%
+    \begin{beamercolorbox}[wd=0.3\paperwidth, ht=0.0cm, dp=0ex, left, leftskip=0.4cm]{section}%
       \PKU@logo%
-      \vfill%
-      \else%
-      \raisebox{0.2cm}{\PKU@department}%
-      \fi%
     \end{beamercolorbox}%
-    \begin{beamercolorbox}[wd=0.4\paperwidth, ht=0.6cm, dp=1ex, center, sep=0.2cm]{section}%
-      \ifnum\thepage>1%
+    \begin{beamercolorbox}[wd=0.4\paperwidth, ht=0.0cm, dp=1ex, center, sep = 0.1cm]{section}%
       \insertsectionhead%
-      \fi%
     \end{beamercolorbox}%
-    \begin{beamercolorbox}[wd=0.3\paperwidth, ht=0.6cm, dp=1ex, right, rightskip=0.4cm]{subsection}%
-      \ifnum\thepage>1%
-      \raisebox{0.2cm}{\insertframenumber{} / \inserttotalframenumber\hspace*{2ex}}%
-      \else%
-      \raisebox{0.2cm}{\insertinstitute}%
-      \fi%
+    \begin{beamercolorbox}[wd=0.3\paperwidth, ht=0.0cm, dp=1ex, right, rightskip = 0.4cm, sep = 0.1cm]{section}%
+      \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}%
     \end{beamercolorbox}
+    \fi%
   }
 }
 
-
 \setbeamertemplate{background}{%
-	\ifnum\thepage>1\relax%
-		\begin{tikzpicture}
-		\useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
-		\draw[PKUTitleLineRed] ([yshift=-1.2cm]current page.north west) -- ([yshift=-1.2cm]current page.north east);
-        \node[opacity=0.2] at (11, 2.5) {\PKU@backgroundlogo};
-		\end{tikzpicture}
-	\else%
-	\begin{tikzpicture}
-		\useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
-		\fill[color=PKURed] (0,0) rectangle (\the\paperwidth,\the\paperheight);
-	\end{tikzpicture}%
-	\fi%
+    \ifnum\thepage>1\relax%
+        \begin{tikzpicture}
+        \useasboundingbox (0cm, 0cm) rectangle(\the\paperwidth, \the\paperheight);
+        \draw[PKUTitleLineRed, line width=0.05cm] ([yshift=-1.2cm]current page.north west) -- ([yshift=-1.2cm]current page.north east);
+        \fill[PKURed] (0cm, 0cm) rectangle (\the\paperwidth, 0.65cm);
+        \end{tikzpicture}
+    \else%
+    \begin{tikzpicture}
+        \useasboundingbox (0,0) rectangle(\the\paperwidth, \the\paperheight);
+        \fill[color=PKURed] (0,0) rectangle (\the\paperwidth, \the\paperheight);
+        \node[opacity=0.4] at (4cm, 4cm) {\PKU@titlepagebackground};
+        \fill[path fading=PKUleft, PKURed] (0, 0) rectangle (0.5 * \the\paperwidth, \the\paperheight);
+        %% plot color
+        \fill[PKURed] (0.5 * \the\paperwidth, 0) rectangle (\the\paperwidth, \the\paperheight);
+        %% plot color
+        \fill[PKURed, path fading=PKUup] (0, 0.4 * \the\paperheight) rectangle (\the\paperwidth, \the\paperheight);
+    \end{tikzpicture}%
+    \fi%
 }
 
 \tikzfading[
@@ -141,28 +127,22 @@
 \setbeamertemplate{title page}{
   \usebeamercolor{title page}
   \begin{tikzpicture}
-	\useasboundingbox (1,0) rectangle (\the\paperwidth,\the\paperheight);
-	\node[opacity=0.4] at (4, 4) {\PKU@titlepagebackground};
-    \fill[path fading=PKUleft,PKURed] (0, 0) rectangle (9,\the\paperheight);
+    \useasboundingbox (1,0) rectangle (\the\paperwidth, \the\paperheight);
+    %% logo
+    \node[anchor=west] at ([xshift=1cm, yshift=-1.5cm]current page.north west) {\PKU@titlepagelogo};
     %% plot color
-    \fill[PKURed] (9, 0) rectangle (\the\paperwidth,\the\paperheight);
-    %% plot color
-    \fill[PKURed, path fading=PKUup] (0, 3) rectangle (\the\paperwidth,8);
-    %% plot color
-    \fill[PKURed] (0, 7.5) rectangle (\the\paperwidth,\the\paperheight);
-    %% plot color
-    \node[right] at (1, 8.5) {\PKU@titlepagelogo};  %% plot logo
-	\node[align=center, font=\usebeamerfont{title}] at (6.4, 6.5) {\inserttitle};
-	\node[align=center, font=\usebeamerfont{author}] at (6.4, 5.2) {\insertauthor};
-    \node[align=center, font=\usebeamerfont{author}] at (6.4, 4.6) {Supervisor: \PKU@supervisor};
-    \node[align=center] at (11.0, 1.4) {\insertdate};
-    %\draw[step=1, help lines] (0,0) grid (\the\paperwidth,\the\paperheight);
+    \node[align=center, font=\usebeamerfont{title}] at (0.5 * \the\paperwidth, 0.6 * \the\paperheight) {\inserttitle};
+    \node[align=center, font=\usebeamerfont{author}] at (0.5 * \the\paperwidth, 0.6 * \the\paperheight - 1cm) {\insertauthor};
+    \node[align=center, font=\usebeamerfont{department}] at (0.5 * \the\paperwidth, 0.6 * \the\paperheight - 1.5cm) {\PKU@department};
+    \node[anchor=center, font=\usebeamerfont{date}] at (0.5 * \the\paperwidth, 0.6 * \the\paperheight - 2cm) {\insertdate};
+    %% guide
+    % \draw[step=1, help lines] (0,0) grid (\the\paperwidth,\the\paperheight);
   \end{tikzpicture}
 }
 
 \setbeamertemplate{frametitle}{
 \vspace*{0.1cm}%
 \begin{beamercolorbox}{frametitle}
-	\usebeamerfont{frametitle}\insertframetitle
+    \usebeamerfont{frametitle}\insertframetitle
 \end{beamercolorbox}
 }

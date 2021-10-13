@@ -1,0 +1,128 @@
+% for widescreen, 16:9, 33.867 x 19.05 cm, 13.33 x 7.5 in
+% for standard, 4:3, 25.4 x 19.05 cm, 10 x 7.5 in
+
+\RequirePackage{tikz}
+\usetikzlibrary{fadings}
+\RequirePackage{iftex}
+\RequirePackage{xcolor}
+
+\AtBeginDocument{\setbeamertemplate{logo}{}}
+
+\definecolor{UCLABlue}{RGB}{39,116,174}
+\definecolor{UCLADarkestBlue}{RGB}{0,59,92}
+\definecolor{UCLADarkerBlue}{RGB}{0,85,135}
+\definecolor{UCLALighterBlue}{RGB}{139,184,232}
+\definecolor{UCLALightestBlue}{RGB}{218,235,254}
+\definecolor{UCLAGold}{RGB}{255,209,0}
+\definecolor{UCLADarkestGold}{RGB}{255,184,28}
+\definecolor{UCLADarkerGold}{RGB}{255,199,44}
+
+
+\newcommand{\UCLA@mainlogo}{}
+\newcommand{\UCLA@department}{}
+\newcommand{\UCLA@titlepagelogo}{}
+\newcommand{\UCLA@titlepagebackground}{}
+\newcommand{\UCLA@date}{}
+
+\renewcommand{\date}[1]{\renewcommand{\UCLA@date}{#1}}
+\newcommand{\mainlogo}[1]{\renewcommand{\UCLA@mainlogo}{#1}}
+\newcommand{\department}[1]{\renewcommand{\UCLA@department}{#1}}
+\newcommand{\titlepagelogo}[1]{\renewcommand{\UCLA@titlepagelogo}{#1}}
+
+\setbeamercolor{normal text}{fg=UCLADarkestBlue}
+\setbeamercolor{frametitle}{fg=UCLABlue}
+\setbeamercolor{footline}{fg=white}
+\setbeamercolor{section}{bg=UCLADarkerBlue, fg=white}
+\setbeamercolor{subsection}{bg=UCLADarkerBlue, fg=white}
+\setbeamercolor*{item}{fg=UCLAGold}
+\setbeamercolor*{item projected}{bg=UCLAGold}
+\setbeamercolor*{enumerate item}{fg=UCLAGold}
+\setbeamercolor*{enumerate subitem}{parent={enumerate item}}
+\setbeamercolor*{enumerate subsubitem}{parent={enumerate item}}
+\setbeamercolor{local structure}{fg=UCLAGold}
+\setbeamercolor{title page}{fg=white}
+\setbeamercolor{block title}{fg=UCLADarkestGold}
+\setbeamercolor{block title example}{fg=UCLADarkestGold}
+\setbeamercolor{section in toc}{fg=UCLADarkerBlue}
+\setbeamercolor{subsection in toc}{fg=UCLADarkerBlue}
+\setbeamercolor{section in head/foot}{fg=UCLADarkerBlue}
+\setbeamercolor{subsection in head/foot}{fg=white}
+
+\setbeamerfont{title}{size=\LARGE}
+\setbeamerfont{author}{size=\small}
+\setbeamerfont{department}{size=\scriptsize}
+\setbeamerfont{date}{size=\scriptsize}
+\setbeamerfont{frametitle}{series=\bfseries}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{itemize items}[square]
+% \setbeamertemplate{background canvas}[vertical shading][bottom=white,top=white]
+
+\setbeamertemplate{frametitle}{
+\vspace*{0.1cm}%
+\begin{beamercolorbox}{frametitle}
+    \usebeamerfont{frametitle}\insertframetitle
+\end{beamercolorbox}
+}
+
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+    \ifnum\thepage>1\relax%
+    \begin{beamercolorbox}[wd=0.3\paperwidth, ht=0cm, dp=1ex, left, leftskip=0.4cm, sep=0.00cm]{footline}%
+      \UCLA@mainlogo%
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=0.4\paperwidth, ht=0cm, dp=1ex, center, sep=0.05cm]{footline}%
+      \insertsectionhead%
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=0.3\paperwidth, ht=0cm, dp=1ex, right, rightskip=0.4cm, sep=0.05cm]{footline}%
+      \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}%
+    \end{beamercolorbox}
+    \fi%
+  }
+}
+
+\tikzfading[
+  name=East,
+  left color=transparent!0,
+  middle color=transparent!30,
+  right color=transparent!100
+]
+
+\setbeamertemplate{background}{%
+  \ifnum\thepage>1\relax%
+  \begin{tikzpicture}
+    \useasboundingbox (0cm, 0cm) rectangle (\the\paperwidth,\the\paperheight);
+    \draw[UCLADarkestBlue, line width=0.05cm] ([yshift=-1cm]current page.north west) -- ([yshift=-1cm]current page.north east);
+    \shade[left color=UCLADarkerBlue, right color=UCLABlue] (0cm, 0cm) rectangle (\the\paperwidth, 0.5cm);
+    \shade[left color=UCLADarkestGold, right color=UCLAGold] ([xshift=-0.1cm, yshift=0.5cm]current page.south west) rectangle ([xshift=0.1cm, yshift=0.55cm]current page.south east);
+  \end{tikzpicture}
+  \else%
+  \begin{tikzpicture}
+    \useasboundingbox (0cm, 0cm) rectangle (\the\paperwidth,\the\paperheight);
+    \fill[UCLABlue] (0cm, 0cm) rectangle (\the\paperwidth, \the\paperheight);
+    \shade[left color=UCLADarkerBlue, right color=UCLABlue] (0cm, 0cm) rectangle (\the\paperwidth, \the\paperheight);
+    %% guide
+    % \draw[step=1, help lines] (0,0) grid (\the\paperwidth,\the\paperheight);
+  \end{tikzpicture}
+  \fi%
+}
+
+\setbeamertemplate{title page}{
+  \usebeamercolor{title page}
+  \begin{tikzpicture}
+    \useasboundingbox (1, 0) rectangle (\the\paperwidth, \the\paperheight);
+    %% logo
+    \node[anchor=west] at ([xshift=1cm, yshift=-1.5cm]current page.north west) {\UCLA@titlepagelogo};
+    %% title
+    \draw[UCLAGold, line width = 0.05cm] (1cm, \the\paperheight * 0.4) -- (\the\paperwidth - 1cm, \the\paperheight * 0.4);
+    \draw[UCLAGold, line width = 0.05cm] (1cm, \the\paperheight * 0.6) -- (\the\paperwidth - 1cm, \the\paperheight * 0.6);
+    \node[anchor=west, font=\usebeamerfont{title}] at (1cm, \the\paperheight * 0.5) {\inserttitle};
+    %% speaker and department
+    \node[anchor=west, font=\usebeamerfont{author}] at (1cm, \the\paperheight * 0.3) {\insertauthor};
+    \node[anchor=west, font=\usebeamerfont{department}] at (1cm, \the\paperheight * 0.25) {\UCLA@department};
+    \node[anchor=west, font=\usebeamerfont{date}] at (1cm, \the\paperheight * 0.2) {\insertdate};
+    %% guide
+    % \draw[step=1, help lines] (0,0) grid (current page.north east);
+  \end{tikzpicture}
+}
