@@ -18,16 +18,17 @@
 \definecolor{UCLADarkerGold}{RGB}{255,199,44}
 
 
-\newcommand{\UCLA@mainlogo}{}
+\newcommand{\UCLA@framepagelogo}{}
 \newcommand{\UCLA@department}{}
 \newcommand{\UCLA@titlepagelogo}{}
-\newcommand{\UCLA@titlepagebackground}{}
+\newcommand{\UCLA@titlepageimage}{}
 \newcommand{\UCLA@date}{}
 
 \renewcommand{\date}[1]{\renewcommand{\UCLA@date}{#1}}
-\newcommand{\mainlogo}[1]{\renewcommand{\UCLA@mainlogo}{#1}}
+\newcommand{\framepagelogo}[1]{\renewcommand{\UCLA@framepagelogo}{#1}}
 \newcommand{\department}[1]{\renewcommand{\UCLA@department}{#1}}
 \newcommand{\titlepagelogo}[1]{\renewcommand{\UCLA@titlepagelogo}{#1}}
+\newcommand{\titlepageimage}[1]{\renewcommand{\UCLA@titlepageimage}{#1}}
 
 \setbeamercolor{normal text}{fg=UCLADarkestBlue}
 \setbeamercolor{frametitle}{fg=UCLABlue}
@@ -53,6 +54,7 @@
 \setbeamerfont{department}{size=\scriptsize}
 \setbeamerfont{date}{size=\scriptsize}
 \setbeamerfont{frametitle}{series=\bfseries}
+\setbeamerfont{footline}{family=\sffamily}
 
 \setbeamertemplate{navigation symbols}{}
 \setbeamertemplate{itemize items}[square]
@@ -69,37 +71,49 @@
   \leavevmode%
   \hbox{%
     \ifnum\thepage>1\relax%
-    \begin{beamercolorbox}[wd=0.3\paperwidth, ht=0cm, dp=1ex, left, leftskip=0.4cm, sep=0.00cm]{footline}%
-      \UCLA@mainlogo%
+    \begin{beamercolorbox}[wd=\paperwidth, ht=0cm, dp=1ex, right, rightskip=0.15cm, sep=0.05cm]{footline}%
+      \insertframenumber%
+      \newline%
+      --
+      \newline%
+      \inserttotalframenumber
     \end{beamercolorbox}%
-    \begin{beamercolorbox}[wd=0.4\paperwidth, ht=0cm, dp=1ex, center, sep=0.05cm]{footline}%
-      \insertsectionhead%
-    \end{beamercolorbox}%
-    \begin{beamercolorbox}[wd=0.3\paperwidth, ht=0cm, dp=1ex, right, rightskip=0.4cm, sep=0.05cm]{footline}%
-      \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}%
-    \end{beamercolorbox}
     \fi%
   }
 }
 
 \setbeamertemplate{background}{%
   \ifnum\thepage>1\relax%
+  % frame page
   \begin{tikzpicture}
-    \useasboundingbox (0cm, 0cm) rectangle (\the\paperwidth,\the\paperheight);
-    \draw[UCLADarkestBlue, line width=0.05cm] ([yshift=-1cm]current page.north west) -- ([yshift=-1cm]current page.north east);
-    \shade[left color=UCLADarkerBlue, right color=UCLABlue] (0cm, 0cm) rectangle (\the\paperwidth, 0.5cm);
-    \shade[left color=UCLADarkestGold, right color=UCLAGold] ([xshift=-0.1cm, yshift=0.5cm]current page.south west) rectangle ([xshift=0.1cm, yshift=0.55cm]current page.south east);
+    \useasboundingbox (0cm, 0cm) rectangle (\the\paperwidth, \the\paperheight);
+    \fill[UCLABlue]
+    (\the\paperwidth - 0.6cm, \the\paperheight - 2.15cm)
+    -- (\the\paperwidth, \the\paperheight - 2.15cm)
+    -- (\the\paperwidth, 0cm)
+    -- (\the\paperwidth - 0.6cm, 0cm)
+    -- cycle;
+    \draw[UCLAGold, line width=0.1cm]
+    (\the\paperwidth - 0.6cm, \the\paperheight - 2.15cm)
+    -- (\the\paperwidth, \the\paperheight - 2.15cm);
+    %% logo
+    \node[anchor=center, rotate=90] at (\the\paperwidth - 0.3cm, \the\paperheight - 1cm) {\UCLA@framepagelogo};
   \end{tikzpicture}
   \else%
+  % title page
   \begin{tikzpicture}
     \useasboundingbox (0cm, 0cm) rectangle (\the\paperwidth,\the\paperheight);
-    \fill[UCLABlue] (0cm, 0cm) rectangle (\the\paperwidth, \the\paperheight);
-    \shade[left color=UCLADarkerBlue, right color=UCLABlue] (0cm, 0cm) rectangle (\the\paperwidth, \the\paperheight);
+    \node[anchor=west] at (-0.2cm, 0.5 * \the\paperheight) {%
+      \UCLA@titlepageimage
+    };
+    \fill[UCLABlue]
+    (0.62 * \the\paperwidth, 0cm) rectangle (\the\paperwidth, \the\paperheight);
     %% logo
-    \node[anchor=west] at ([xshift=1cm, yshift=-1.5cm]current page.north west) {\UCLA@titlepagelogo};
-    %% title lines
-    \draw[UCLAGold, line width = 0.05cm] (1cm, \the\paperheight * 0.4) -- (\the\paperwidth - 1cm, \the\paperheight * 0.4);
-    \draw[UCLAGold, line width = 0.05cm] (1cm, \the\paperheight * 0.6) -- (\the\paperwidth - 1cm, \the\paperheight * 0.6);
+    \node[anchor=north] at (0.81 * \the\paperwidth, \the\paperheight - 0.5cm) {\UCLA@titlepagelogo};
+    %% separation line
+    \draw[UCLAGold, line width = 0.05cm]
+    (0.71 * \the\paperwidth, 0.33 * \the\paperheight)
+    -- (0.91 * \the\paperwidth, 0.33 * \the\paperheight);
     %% guide
     % \draw[step=1, help lines] (0,0) grid (\the\paperwidth,\the\paperheight);
   \end{tikzpicture}
@@ -111,11 +125,21 @@
   \begin{tikzpicture}
     \useasboundingbox (1, 0) rectangle (\the\paperwidth, \the\paperheight);
     %% title
-    \node[anchor=west, font=\usebeamerfont{title}] at (1cm, \the\paperheight * 0.5) {\inserttitle};
+    \node[anchor=north, font=\usebeamerfont{title}] at (0.81 * \the\paperwidth, 0.75 * \the\paperheight) {%
+      \begin{minipage}{0.35\textwidth}
+        \centering
+        \inserttitle
+      \end{minipage}
+    };
     %% speaker and department
-    \node[anchor=west, font=\usebeamerfont{author}] at (1cm, \the\paperheight * 0.3) {\insertauthor};
-    \node[anchor=west, font=\usebeamerfont{department}] at (1cm, \the\paperheight * 0.25) {\UCLA@department};
-    \node[anchor=west, font=\usebeamerfont{date}] at (1cm, \the\paperheight * 0.2) {\insertdate};
+    \node[anchor=south, font=\usebeamerfont{author}] at (0.81 * \the\paperwidth, \the\paperheight * 0.25) {\insertauthor};
+    \node[anchor=south, font=\usebeamerfont{department}] at (0.81 * \the\paperwidth, \the\paperheight * 0.15) {
+      \begin{minipage}{0.35\textwidth}
+        \centering
+        \UCLA@department
+      \end{minipage}
+    };
+    \node[anchor=south, font=\usebeamerfont{date}] at (0.81 * \the\paperwidth, \the\paperheight * 0.10) {\insertdate};
     %% guide
     % \draw[step=1, help lines] (0,0) grid (current page.north east);
   \end{tikzpicture}
