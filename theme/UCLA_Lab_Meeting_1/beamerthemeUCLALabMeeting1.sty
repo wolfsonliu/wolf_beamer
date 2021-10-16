@@ -18,14 +18,14 @@
 \definecolor{UCLADarkerGold}{RGB}{255,199,44}
 
 
-\newcommand{\UCLA@mainlogo}{}
+\newcommand{\UCLA@framepagelogo}{}
 \newcommand{\UCLA@department}{}
 \newcommand{\UCLA@titlepagelogo}{}
 \newcommand{\UCLA@titlepagebackground}{}
 \newcommand{\UCLA@date}{}
 
 \renewcommand{\date}[1]{\renewcommand{\UCLA@date}{#1}}
-\newcommand{\mainlogo}[1]{\renewcommand{\UCLA@mainlogo}{#1}}
+\newcommand{\framepagelogo}[1]{\renewcommand{\UCLA@framepagelogo}{#1}}
 \newcommand{\department}[1]{\renewcommand{\UCLA@department}{#1}}
 \newcommand{\titlepagelogo}[1]{\renewcommand{\UCLA@titlepagelogo}{#1}}
 
@@ -70,7 +70,7 @@
   \hbox{%
     \ifnum\thepage>1\relax%
     \begin{beamercolorbox}[wd=0.3\paperwidth, ht=0cm, dp=1ex, left, leftskip=0.4cm, sep=0.00cm]{footline}%
-      \UCLA@mainlogo%
+      \includegraphics[height=0.3cm]{\UCLA@framepagelogo}%
     \end{beamercolorbox}%
     \begin{beamercolorbox}[wd=0.4\paperwidth, ht=0cm, dp=1ex, center, sep=0.05cm]{footline}%
       \insertsectionhead%
@@ -96,7 +96,7 @@
     \fill[UCLABlue] (0cm, 0cm) rectangle (\the\paperwidth, \the\paperheight);
     \shade[left color=UCLADarkerBlue, right color=UCLABlue] (0cm, 0cm) rectangle (\the\paperwidth, \the\paperheight);
     %% logo
-    \node[anchor=west] at ([xshift=1cm, yshift=-1.5cm]current page.north west) {\UCLA@titlepagelogo};
+    \node[anchor=west] at ([xshift=1cm, yshift=-1.5cm]current page.north west) {\includegraphics[height=2cm]{\UCLA@titlepagelogo}};
     %% title lines
     \draw[UCLAGold, line width = 0.05cm] (1cm, \the\paperheight * 0.4) -- (\the\paperwidth - 1cm, \the\paperheight * 0.4);
     \draw[UCLAGold, line width = 0.05cm] (1cm, \the\paperheight * 0.6) -- (\the\paperwidth - 1cm, \the\paperheight * 0.6);

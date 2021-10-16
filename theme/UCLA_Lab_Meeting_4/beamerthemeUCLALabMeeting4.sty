@@ -1,0 +1,205 @@
+% for widescreen, 16:9, 33.867 x 19.05 cm, 13.33 x 7.5 in
+% for standard, 4:3, 25.4 x 19.05 cm, 10 x 7.5 in
+
+\RequirePackage{tikz}
+\usetikzlibrary{fadings}
+\RequirePackage{iftex}
+\RequirePackage{xcolor}
+
+\AtBeginDocument{\setbeamertemplate{logo}{}}
+
+\definecolor{UCLABlue}{RGB}{39,116,174}
+\definecolor{UCLADarkestBlue}{RGB}{0,59,92}
+\definecolor{UCLADarkerBlue}{RGB}{0,85,135}
+\definecolor{UCLALighterBlue}{RGB}{139,184,232}
+\definecolor{UCLALightestBlue}{RGB}{218,235,254}
+\definecolor{UCLAGold}{RGB}{255,209,0}
+\definecolor{UCLADarkestGold}{RGB}{255,184,28}
+\definecolor{UCLADarkerGold}{RGB}{255,199,44}
+
+
+\newcommand{\UCLA@framepagelogo}{}
+\newcommand{\UCLA@department}{}
+\newcommand{\UCLA@titlepagelogo}{}
+\newcommand{\UCLA@titlepageimagea}{}
+\newcommand{\UCLA@titlepageimageb}{}
+\newcommand{\UCLA@titlepageimagec}{}
+\newcommand{\UCLA@titlepageimaged}{}
+\newcommand{\UCLA@titlepageimagee}{}
+\newcommand{\UCLA@date}{}
+
+\renewcommand{\date}[1]{\renewcommand{\UCLA@date}{#1}}
+\newcommand{\framepagelogo}[1]{\renewcommand{\UCLA@framepagelogo}{#1}}
+\newcommand{\department}[1]{\renewcommand{\UCLA@department}{#1}}
+\newcommand{\titlepagelogo}[1]{\renewcommand{\UCLA@titlepagelogo}{#1}}
+\newcommand{\titlepageimagea}[1]{\renewcommand{\UCLA@titlepageimagea}{#1}}
+\newcommand{\titlepageimageb}[1]{\renewcommand{\UCLA@titlepageimageb}{#1}}
+\newcommand{\titlepageimagec}[1]{\renewcommand{\UCLA@titlepageimagec}{#1}}
+\newcommand{\titlepageimaged}[1]{\renewcommand{\UCLA@titlepageimaged}{#1}}
+\newcommand{\titlepageimagee}[1]{\renewcommand{\UCLA@titlepageimagee}{#1}}
+
+\setbeamercolor{normal text}{fg=UCLADarkestBlue}
+\setbeamercolor{frametitle}{fg=UCLABlue}
+\setbeamercolor{footline}{fg=UCLADarkestBlue}
+\setbeamercolor{section}{bg=UCLADarkerBlue, fg=white}
+\setbeamercolor{subsection}{bg=UCLADarkerBlue, fg=white}
+\setbeamercolor*{item}{fg=UCLADarkestGold}
+\setbeamercolor*{item projected}{bg=UCLADarkestGold}
+\setbeamercolor*{enumerate item}{fg=UCLADarkestGold}
+\setbeamercolor*{enumerate subitem}{parent={enumerate item}}
+\setbeamercolor*{enumerate subsubitem}{parent={enumerate item}}
+\setbeamercolor{local structure}{fg=UCLADarkestGold}
+\setbeamercolor{title page}{fg=white}
+\setbeamercolor{block title}{fg=UCLADarkestGold}
+\setbeamercolor{block title example}{fg=UCLADarkestGold}
+\setbeamercolor{section in toc}{fg=UCLADarkerBlue}
+\setbeamercolor{subsection in toc}{fg=UCLADarkerBlue}
+\setbeamercolor{section in head/foot}{fg=UCLADarkerBlue}
+\setbeamercolor{subsection in head/foot}{fg=white}
+
+\setbeamerfont{title}{size=\LARGE}
+\setbeamerfont{author}{size=\small}
+\setbeamerfont{department}{size=\scriptsize}
+\setbeamerfont{date}{size=\scriptsize}
+\setbeamerfont{frametitle}{series=\bfseries}
+\setbeamerfont{footline}{family=\sffamily}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{itemize items}[square]
+% \setbeamertemplate{background canvas}[vertical shading][bottom=white,top=white]
+
+\setbeamertemplate{frametitle}{
+\vspace*{0.1cm}%
+\begin{beamercolorbox}{frametitle}
+    \usebeamerfont{frametitle}\insertframetitle
+\end{beamercolorbox}
+}
+
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+    \ifnum\thepage>1\relax%
+    \begin{beamercolorbox}[wd=\paperwidth, ht=0cm, dp=1ex, right, rightskip=0.3cm, sep=0.05cm]{footline}%
+      \insertframenumber / \inserttotalframenumber%
+    \end{beamercolorbox}%
+    \fi%
+  }
+}
+
+\tikzfading[
+  name=Transparent70,
+  left color=transparent!70,
+  middle color=transparent!70,
+  right color=transparent!70
+]
+
+\tikzfading[
+  name=Transparent100,
+  left color=transparent!100,
+  middle color=transparent!100,
+  right color=transparent!100
+]
+
+
+\setbeamertemplate{background}{%
+  \ifnum\thepage>1\relax%
+  % frame page
+  \begin{tikzpicture}
+    \useasboundingbox (0cm, 0cm) rectangle (\the\paperwidth, \the\paperheight);
+    % block fill
+    \fill[color=UCLADarkestBlue] (0cm, 0cm) rectangle (0.2 * \the\paperwidth, 0.4cm);
+    \fill[color=UCLADarkerBlue] (0.2 * \the\paperwidth, 0cm) rectangle (0.4 * \the\paperwidth, 0.4cm);
+    \fill[color=UCLABlue] (0.4 * \the\paperwidth, 0cm) rectangle (0.6 * \the\paperwidth, 0.4cm);
+    \fill[color=UCLAGold] (0.6 * \the\paperwidth, 0cm) rectangle (0.8 * \the\paperwidth, 0.4cm);
+    %% logo
+    \node[anchor=center] at (0.5 * \the\paperwidth, 0.2cm) {\includegraphics[height=0.4cm]{\UCLA@framepagelogo}};
+  \end{tikzpicture}
+  \else%
+  % title page
+  \begin{tikzpicture}
+    \useasboundingbox (0cm, 0cm) rectangle (\the\paperwidth,\the\paperheight);
+    % block fill
+    % picture
+    \begin{scope}
+      \clip (0cm, 0.38 * \the\paperheight) rectangle (0.2 * \the\paperwidth, \the\paperheight);
+      \node at (0.1 * \the\paperwidth, 0.69 * \the\paperheight) {\includegraphics[height=6cm]{\UCLA@titlepageimagea}};
+    \end{scope}
+    % cover
+    \fill[color=UCLADarkestBlue, path fading=Transparent70]
+    (0cm, 0.38 * \the\paperheight) rectangle (0.2 * \the\paperwidth, \the\paperheight);
+    % picture
+    \begin{scope}
+      \clip (0.2 * \the\paperwidth, 0.38 * \the\paperheight) rectangle (0.4 * \the\paperwidth, \the\paperheight);
+      \node at (0.3 * \the\paperwidth, 0.69 * \the\paperheight) {\includegraphics[height=6cm]{\UCLA@titlepageimageb}};
+    \end{scope}
+    % cover
+    \fill[color=UCLADarkerBlue, path fading=Transparent70]
+    (0.2 * \the\paperwidth, 0.38 * \the\paperheight) rectangle (0.4 * \the\paperwidth, \the\paperheight);
+    % picture
+    \begin{scope}
+      \clip (0.4 * \the\paperwidth, 0.38 * \the\paperheight) rectangle (0.6 * \the\paperwidth, \the\paperheight);
+      \node at (0.5 * \the\paperwidth, 0.69 * \the\paperheight) {\includegraphics[height=6cm]{\UCLA@titlepageimagec}};
+    \end{scope}
+    % cover
+    \fill[color=UCLABlue, path fading=Transparent70]
+    (0.4 * \the\paperwidth, 0.38 * \the\paperheight) rectangle (0.6 * \the\paperwidth, \the\paperheight);
+    % picture
+    \begin{scope}
+      \clip (0.6 * \the\paperwidth, 0.38 * \the\paperheight) rectangle (0.8 * \the\paperwidth, \the\paperheight);
+      \node at (0.7 * \the\paperwidth, 0.69 * \the\paperheight) {\includegraphics[height=6cm]{\UCLA@titlepageimaged}};
+    \end{scope}
+    % cover
+    \fill[color=UCLAGold, path fading=Transparent70]
+    (0.6 * \the\paperwidth, 0.38 * \the\paperheight) rectangle (0.8 * \the\paperwidth, \the\paperheight);
+    % picture
+    \begin{scope}
+      \clip (0.8 * \the\paperwidth, 0.38 * \the\paperheight) rectangle (\the\paperwidth, \the\paperheight);
+      \node at (0.9 * \the\paperwidth, 0.69 * \the\paperheight) {\includegraphics[height=6cm]{\UCLA@titlepageimagee}};
+    \end{scope}
+    % cover
+    \fill[color=white, path fading=Transparent100]
+    (0.8 * \the\paperwidth, 0.38 * \the\paperheight) rectangle (\the\paperwidth, \the\paperheight);
+
+    % title region
+    \fill[color=UCLABlue] (0cm, 0cm) rectangle (\the\paperwidth, 0.38 * \the\paperheight);
+
+    % block fill
+    \fill[color=UCLADarkestBlue] (0cm, 0cm) rectangle (0.2 * \the\paperwidth, 0.4cm);
+    \fill[color=UCLADarkerBlue] (0.2 * \the\paperwidth, 0cm) rectangle (0.4 * \the\paperwidth, 0.4cm);
+    \fill[color=UCLABlue] (0.4 * \the\paperwidth, 0cm) rectangle (0.6 * \the\paperwidth, 0.4cm);
+    \fill[color=UCLAGold] (0.6 * \the\paperwidth, 0cm) rectangle (0.8 * \the\paperwidth, 0.4cm);
+    \fill[color=white] (0.8 * \the\paperwidth, 0cm) rectangle (\the\paperwidth, 0.4cm);
+    %% logo
+    \node[anchor=center] at (0.5 * \the\paperwidth, 0.2cm) {\includegraphics[height=0.4cm]{\UCLA@titlepagelogo}};
+    %% separation line
+    \draw[UCLAGold, line width = 0.05cm]
+    (0.62 * \the\paperwidth, 0.09 * \the\paperheight)
+    -- (0.62 * \the\paperwidth, 0.29 * \the\paperheight);
+    %% guide
+    % \draw[step=1, help lines] (0,0) grid (\the\paperwidth,\the\paperheight);
+  \end{tikzpicture}
+  \fi%
+}
+
+\setbeamertemplate{title page}{
+  \usebeamercolor{title page}
+  \begin{tikzpicture}
+    \useasboundingbox (1, 0) rectangle (\the\paperwidth, \the\paperheight);
+    %% title
+    \node[anchor=center, font=\usebeamerfont{title}] at (0.5 * \the\paperwidth, 0.19 * \the\paperheight) {%
+      \begin{minipage}{0.6 \linewidth}
+        \raggedleft
+        \inserttitle
+      \end{minipage}
+      \hspace{0.1\linewidth}
+      \begin{minipage}{0.32 \linewidth}
+        \raggedright
+        \usebeamerfont{author}{\insertauthor} \\
+        \usebeamerfont{department}{\UCLA@department} \\
+        \usebeamerfont{date}{\insertdate}
+      \end{minipage}
+    };
+    %% guide
+    % \draw[step=1, help lines] (0,0) grid (current page.north east);
+  \end{tikzpicture}
+}

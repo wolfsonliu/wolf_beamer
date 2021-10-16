@@ -97,19 +97,19 @@
     (\the\paperwidth - 0.6cm, \the\paperheight - 2.15cm)
     -- (\the\paperwidth, \the\paperheight - 2.15cm);
     %% logo
-    \node[anchor=center, rotate=90] at (\the\paperwidth - 0.3cm, \the\paperheight - 1cm) {\UCLA@framepagelogo};
+    \node[anchor=center, rotate=90] at (\the\paperwidth - 0.3cm, \the\paperheight - 1cm) {\includegraphics[height=0.6cm]{\UCLA@framepagelogo}};
   \end{tikzpicture}
   \else%
   % title page
   \begin{tikzpicture}
     \useasboundingbox (0cm, 0cm) rectangle (\the\paperwidth,\the\paperheight);
     \node[anchor=west] at (-0.2cm, 0.5 * \the\paperheight) {%
-      \UCLA@titlepageimage
+      \includegraphics[height=3.54in]{\UCLA@titlepageimage}
     };
     \fill[UCLABlue]
     (0.62 * \the\paperwidth, 0cm) rectangle (\the\paperwidth, \the\paperheight);
     %% logo
-    \node[anchor=north] at (0.81 * \the\paperwidth, \the\paperheight - 0.5cm) {\UCLA@titlepagelogo};
+    \node[anchor=north] at (0.81 * \the\paperwidth, \the\paperheight - 0.5cm) {\includegraphics[width=3.2cm]{\UCLA@titlepagelogo}};
     %% separation line
     \draw[UCLAGold, line width = 0.05cm]
     (0.71 * \the\paperwidth, 0.33 * \the\paperheight)

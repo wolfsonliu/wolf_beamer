@@ -8,7 +8,7 @@
 
 \AtBeginDocument{\setbeamertemplate{logo}{}}
 
-\newcommand{\PKU@logo}{}
+\newcommand{\PKU@framepagelogo}{}
 \newcommand{\PKU@department}{}
 \newcommand{\PKU@titlepagelogo}{}
 \newcommand{\PKU@titlepagebackground}{}
@@ -16,7 +16,7 @@
 \newcommand{\PKU@date}{}
 
 \renewcommand{\date}[1]{\renewcommand{\PKU@date}{#1}}
-\renewcommand{\logo}[1]{\renewcommand{\PKU@logo}{#1}}
+\newcommand{\framepagelogo}[1]{\renewcommand{\PKU@framepagelogo}{#1}}
 \newcommand{\department}[1]{\renewcommand{\PKU@department}{#1}}
 \newcommand{\titlepagelogo}[1]{\renewcommand{\PKU@titlepagelogo}{#1}}
 \newcommand{\titlepagebackground}[1]{\renewcommand{\PKU@titlepagebackground}{#1}}
@@ -85,7 +85,7 @@
   \leavevmode\hbox{%
     \ifnum\thepage>1\relax%
     \begin{beamercolorbox}[wd=0.3\paperwidth, ht=0.0cm, dp=0ex, left, leftskip=0.4cm]{section}%
-      \PKU@logo%
+      % \includegraphics[height=0.45cm]{\PKU@framepagelogo}%
     \end{beamercolorbox}%
     \begin{beamercolorbox}[wd=0.4\paperwidth, ht=0.0cm, dp=1ex, center, sep = 0.1cm]{section}%
       \insertsectionhead%
@@ -98,24 +98,29 @@
 }
 
 \setbeamertemplate{background}{%
-    \ifnum\thepage>1\relax%
-        \begin{tikzpicture}
-        \useasboundingbox (0cm, 0cm) rectangle(\the\paperwidth, \the\paperheight);
-        \draw[PKUTitleLineRed, line width=0.05cm] ([yshift=-1.2cm]current page.north west) -- ([yshift=-1.2cm]current page.north east);
-        \fill[PKURed] (0cm, 0cm) rectangle (\the\paperwidth, 0.65cm);
-        \end{tikzpicture}
-    \else%
+  \ifnum\thepage>1\relax%
     \begin{tikzpicture}
-        \useasboundingbox (0,0) rectangle(\the\paperwidth, \the\paperheight);
-        \fill[color=PKURed] (0,0) rectangle (\the\paperwidth, \the\paperheight);
-        \node[opacity=0.4] at (4cm, 4cm) {\PKU@titlepagebackground};
-        \fill[path fading=PKUleft, PKURed] (0, 0) rectangle (0.5 * \the\paperwidth, \the\paperheight);
-        %% plot color
-        \fill[PKURed] (0.5 * \the\paperwidth, 0) rectangle (\the\paperwidth, \the\paperheight);
-        %% plot color
-        \fill[PKURed, path fading=PKUup] (0, 0.4 * \the\paperheight) rectangle (\the\paperwidth, \the\paperheight);
-    \end{tikzpicture}%
-    \fi%
+    \useasboundingbox (0cm, 0cm) rectangle(\the\paperwidth, \the\paperheight);
+    \draw[PKUTitleLineRed, line width=0.05cm] ([yshift=-1.2cm]current page.north west) -- ([yshift=-1.2cm]current page.north east);
+    \fill[PKURed] (0cm, 0cm) rectangle (\the\paperwidth, 0.65cm);
+    \end{tikzpicture}
+  \else%
+  \begin{tikzpicture}
+    \useasboundingbox (0, 0) rectangle(\the\paperwidth, \the\paperheight);
+    \fill[color=PKURed] (0, 0) rectangle (\the\paperwidth, \the\paperheight);
+    \begin{scope}
+      \clip (0cm, 0cm) rectangle (0.7 * \the\paperwidth, 0.9 * \the\paperheight);
+      \node[opacity=0.4, anchor=west] at (-0.5cm, 1.5in) {\includegraphics[height=3in]{\PKU@titlepagebackground}};
+    \end{scope}
+    \fill[path fading=PKUleft, PKURed] (0, 0) rectangle (0.5 * \the\paperwidth, \the\paperheight);
+    %% plot color
+    \fill[PKURed] (0.5 * \the\paperwidth, 0) rectangle (\the\paperwidth, \the\paperheight);
+    %% plot color
+    \fill[PKURed, path fading=PKUup] (0, 0.4 * \the\paperheight) rectangle (\the\paperwidth, \the\paperheight);
+    %% logo
+    \node[anchor=west] at ([xshift=1cm, yshift=-1.5cm]current page.north west) {\includegraphics[height=1.5cm]{\PKU@titlepagelogo}};
+  \end{tikzpicture}%
+  \fi%
 }
 
 \tikzfading[
@@ -128,8 +133,6 @@
   \usebeamercolor{title page}
   \begin{tikzpicture}
     \useasboundingbox (1,0) rectangle (\the\paperwidth, \the\paperheight);
-    %% logo
-    \node[anchor=west] at ([xshift=1cm, yshift=-1.5cm]current page.north west) {\PKU@titlepagelogo};
     %% plot color
     \node[align=center, font=\usebeamerfont{title}] at (0.5 * \the\paperwidth, 0.6 * \the\paperheight) {\inserttitle};
     \node[align=center, font=\usebeamerfont{author}] at (0.5 * \the\paperwidth, 0.6 * \the\paperheight - 1cm) {\insertauthor};
