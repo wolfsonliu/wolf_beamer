@@ -61,7 +61,10 @@
 \setbeamertemplate{frametitle}{
 \vspace*{0.1cm}%
 \begin{beamercolorbox}{frametitle}
-    \hspace*{2cm}\usebeamerfont{frametitle}\insertframetitle
+  \hspace*{1.5cm}
+  \begin{minipage}{0.9\textwidth}
+    \usebeamerfont{frametitle}\insertframetitle
+  \end{minipage}
 \end{beamercolorbox}
 }
 
@@ -143,7 +146,12 @@
   \begin{tikzpicture}
     \useasboundingbox (1, 0) rectangle (\the\paperwidth, \the\paperheight);
     %% title
-    \node[anchor=west, font=\usebeamerfont{title}] at (1cm, \the\paperheight * 0.7) {\inserttitle};
+    \node[anchor=west, font=\usebeamerfont{title}] at (1cm, \the\paperheight * 0.7) {
+      \begin{minipage}{0.9\textwidth}
+        \raggedright
+        \inserttitle
+      \end{minipage}
+    };
     %% speaker and department
     \node[anchor=west, font=\usebeamerfont{author}] at (1cm, \the\paperheight * 0.38) {\insertauthor};
     \node[anchor=west, font=\usebeamerfont{department}] at (1cm, \the\paperheight * 0.33) {\UCLA@department};

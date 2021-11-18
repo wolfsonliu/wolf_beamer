@@ -86,20 +86,23 @@
   \ifnum\thepage>1\relax%
   \begin{tikzpicture}
     \useasboundingbox (0cm, 0cm) rectangle (\the\paperwidth,\the\paperheight);
-    \draw[UCLADarkestBlue, line width=0.05cm] ([yshift=-1cm]current page.north west) -- ([yshift=-1cm]current page.north east);
-    \shade[left color=UCLADarkerBlue, right color=UCLABlue] (0cm, 0cm) rectangle (\the\paperwidth, 0.5cm);
-    \shade[left color=UCLADarkestGold, right color=UCLAGold] ([xshift=-0.1cm, yshift=0.5cm]current page.south west) rectangle ([xshift=0.1cm, yshift=0.55cm]current page.south east);
+    \fill[color=black, path fading=south]
+    ([yshift=-0.975cm] current page.north west) rectangle ([yshift=-1.055cm]current page.north east);
+    \draw[UCLADarkestBlue, line width=0.05cm]
+    ([yshift=-1cm]current page.north west)
+    -- ([yshift=-1cm]current page.north east);
+    \fill[UCLABlue] (0cm, 0cm) rectangle (\the\paperwidth, 0.5cm);
+    \draw[UCLADarkestGold, line width=0.1cm]
+    ([yshift=0.55cm]current page.south west) rectangle ([yshift=0.55cm]current page.south east);
   \end{tikzpicture}
   \else%
   \begin{tikzpicture}
     \useasboundingbox (0cm, 0cm) rectangle (\the\paperwidth,\the\paperheight);
     \fill[UCLABlue] (0cm, 0cm) rectangle (\the\paperwidth, \the\paperheight);
-    \shade[left color=UCLADarkerBlue, right color=UCLABlue] (0cm, 0cm) rectangle (\the\paperwidth, \the\paperheight);
+    \shade[top color=UCLADarkerBlue, bottom color=UCLABlue] (0cm, 0cm) rectangle (\the\paperwidth, \the\paperheight);
     %% logo
     \node[anchor=west] at ([xshift=1cm, yshift=-1.5cm]current page.north west) {\includegraphics[height=2cm]{\UCLA@titlepagelogo}};
-    %% title lines
-    \draw[UCLAGold, line width = 0.05cm] (1cm, \the\paperheight * 0.4) -- (\the\paperwidth - 1cm, \the\paperheight * 0.4);
-    \draw[UCLAGold, line width = 0.05cm] (1cm, \the\paperheight * 0.6) -- (\the\paperwidth - 1cm, \the\paperheight * 0.6);
+    \draw[UCLAGold, line width = 0.2cm] (0cm, 0.1cm) -- (\the\paperwidth, 0.1cm);
     %% guide
     % \draw[step=1, help lines] (0,0) grid (\the\paperwidth,\the\paperheight);
   \end{tikzpicture}
@@ -111,11 +114,11 @@
   \begin{tikzpicture}
     \useasboundingbox (1, 0) rectangle (\the\paperwidth, \the\paperheight);
     %% title
-    \node[anchor=west, font=\usebeamerfont{title}] at (1cm, \the\paperheight * 0.5) {\inserttitle};
+    \node[anchor=center, font=\usebeamerfont{title}] at (\the\paperwidth * 0.5, \the\paperheight * 0.63) {\inserttitle};
     %% speaker and department
-    \node[anchor=west, font=\usebeamerfont{author}] at (1cm, \the\paperheight * 0.3) {\insertauthor};
-    \node[anchor=west, font=\usebeamerfont{department}] at (1cm, \the\paperheight * 0.25) {\UCLA@department};
-    \node[anchor=west, font=\usebeamerfont{date}] at (1cm, \the\paperheight * 0.2) {\insertdate};
+    \node[anchor=center, font=\usebeamerfont{author}] at (\the\paperwidth * 0.5, \the\paperheight * 0.3) {\insertauthor};
+    \node[anchor=center, font=\usebeamerfont{department}] at (\the\paperwidth * 0.5, \the\paperheight * 0.25) {\UCLA@department};
+    \node[anchor=center, font=\usebeamerfont{date}] at (\the\paperwidth * 0.5, \the\paperheight * 0.2) {\insertdate};
     %% guide
     % \draw[step=1, help lines] (0,0) grid (current page.north east);
   \end{tikzpicture}
