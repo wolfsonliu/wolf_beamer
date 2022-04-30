@@ -21,3 +21,7 @@ I try to make some LaTeX beamer template to use.
 * UCLA Lab Meeting 4: a LaTeX beamer theme for lab meetings in UCLA.
 
 ![UCLA Lab Meeting 4](./theme/UCLA_Lab_Meeting_4/UCLA_Lab_Meeting_4.png)
+
+* UCLA Lab Meeting 5: a LaTeX beamer theme for lab meetings in UCLA.
+
+![UCLA Lab Meeting 5](./theme/UCLA_Lab_Meeting_5/UCLA_Lab_Meeting_5.png)
